@@ -10,6 +10,7 @@ function onRequest(request, sender, sendResponse) {
   // Show the page action for the tab that the sender (content script)
   // was on.
   var cbs = /cbs/;
+  var vk = /vk/;
   var base = /base="(.+?)"\/>/
   var video = /<video src="(.+?)" /
   var mp4 = /\.mp4/
@@ -44,6 +45,10 @@ function onRequest(request, sender, sendResponse) {
                 alert(xml.status + ' ' + xml.statusText);
                 }
       });
+  }
+
+  if(vk.test(pageurl)){
+    videoLink=videoLink.replace(/\//g,'');
   }
   // Return nothing to let the connection be cleaned up.
   sendResponse({});
